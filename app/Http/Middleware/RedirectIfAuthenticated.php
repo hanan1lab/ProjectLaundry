@@ -27,4 +27,27 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
+
+    /*public function handle(Request $request, Closure $next, string ...$guards): Response
+    {
+    $guards = empty($guards) ? [null] : $guards;
+
+    foreach ($guards as $guard) {
+        if (Auth::guard($guard)->check()) {
+            $user = Auth::user();
+
+            if ($user->hasRole('Admin')) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            if ($user->hasRole('Konsumen')) {
+                return redirect()->route('order.index');
+            }
+
+            return redirect()->route('dashboard');
+        }
+    }
+
+    return $next($request);
+}*/
 }

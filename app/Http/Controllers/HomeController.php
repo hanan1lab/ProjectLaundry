@@ -9,9 +9,22 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+     public function adminHome()
+    {
+        return view('home.admin'); // View untuk admin
+    }
+
+    // Halaman untuk Konsumen
+    public function konsumenHome()
+    {
+        return view('home.konsumen'); // View untuk user
+    }
+
     public function index()
     {
-        //
+        
     }
 
     /**
