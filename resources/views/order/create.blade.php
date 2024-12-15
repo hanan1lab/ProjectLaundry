@@ -71,38 +71,26 @@
             background-color: #0077B6;
         }
 
-        button[type="dashboard"] {
+        .back-button {
+            display: inline-block;
             background-color: #999;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            width: 100px;
+            margin: 0 auto; /* Pusatkan tombol secara horizontal */
         }
 
-        button[type="dashboard"]:hover {
+        .back-button:hover {
             background-color: #777;
         }
 
         textarea {
             resize: none;
             height: 100px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-            border-radius: 8px; 
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #0077B6;
-            color: white;
         }
 
         @media (max-width: 768px) {
@@ -114,7 +102,7 @@
                 font-size: 1.5rem;
             }
 
-            label, input, textarea, select, button {
+            label, input, textarea, select, button, .back-button {
                 font-size: 0.9rem;
             }
         }
@@ -159,7 +147,7 @@
 
             <!-- Berat -->
             <div>
-                <label for="weight">Berat (kg):</label>
+                <label for="weight">Jumlah (Kg/Satuan):</label>
                 <input type="number" id="weight" name="weight" required>
             </div>
 
@@ -169,8 +157,13 @@
                 <input type="text" id="total_price" readonly>
             </div>
 
+            <!-- Tombol Buat Order -->
             <button type="submit">Buat Order</button>
-            <button type="dashboard">Kembali</button>
+
+            <!-- Tombol Kembali -->
+            <div style="display: flex; justify-content: center; margin-top: 10px;">
+                <a href="{{ route('order.index') }}" class="back-button">Kembali</a>
+            </div>
         </form>
     </div>
 

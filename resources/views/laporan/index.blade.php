@@ -194,7 +194,7 @@
 
     <!-- Tombol Kembali ke Dashboard -->
     <div class="btn-wrapper">
-        <a href="{{ route('home.admin') }}" class="back-btn">Kembali ke Dashboard</a> <!-- Tombol kembali -->
+        <a href="{{ route('home.admin') }}" class="back-btn">Kembali ke Halaman Admin</a> <!-- Tombol kembali -->
     </div>
 
 </body>

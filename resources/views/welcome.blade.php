@@ -3,13 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to CleanFresh Laundry</title>
+
+    <title>Welcome to Fast Laundry</title>
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <style>
-        body {
-            font-family: 'Figtree', sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body takes full height */
+            font-family: 'Figtree', sans-serif;
             background-color: #f3f4f6;
             color: #333;
         }
@@ -38,6 +50,7 @@
             background-color: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            flex-grow: 1; /* Allow content to grow and take available space */
         }
 
         .content h2 {
@@ -70,44 +83,61 @@
         .cta a:hover {
             background-color: #45a049;
         }
-        
+
         footer {
-        background-color: rgba(76, 175, 80, 0.9); /* Transparansi agar menyatu dengan background */
-        color: white;
-        padding: 2rem 1rem;
-        text-align: center;
-        margin-top: 2rem;
-    }
+            background-color: rgba(76, 175, 80, 0.9); /* Transparansi agar menyatu dengan background */
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
     </style>
 </head>
-    <body>
+<body>
     <div class="header">
-        <h1>Welcome to CleanFresh Laundry</h1>
-        <p>Your trusted partner for clean and fresh clothes!</p>
+        <h1>Welcome to Fast Laundry</h1>
+        <p>Your trusted partner for fast, fresh, and clean clothes!</p>
     </div>
 
     <div class="content">
         <h2>About Our Services</h2>
         <p>
-            At CleanFresh Laundry, we provide high-quality laundry services tailored to your needs. 
-            Whether you need regular washing, dry cleaning, or express services, we've got you covered. 
-            Enjoy fresh, clean, and neatly folded clothes every time.
+            Di Fast Laundry Kami Menyediakan Layanan yang sudah tersedia dengan cepat bersih dan Segar.
+            Kami siap melayani anda.
+            Nikmati pakaian yang segar, bersih, dan terlipat rapi setiap saat.
         </p>
         <p>
-            Our dedicated team ensures that your laundry is handled with the utmost care using eco-friendly detergents and advanced cleaning techniques.
-        </p>
-
+        Tim kami yang berdedikasi memastikan bahwa cucian Anda ditangani dengan sangat hati-hati menggunakan deterjen ramah lingkungan dan teknik pembersihan yang canggih.        </p>
         <div class="cta">
-        @if (Route::has('login'))
+            @if (Route::has('login'))
                 <livewire:welcome.navigation />
-            @endif        
+            @endif
         </div>
     </div>
-    </body>
-    <footer style="background-color: #4caf50; color: white; padding: 2rem 1rem; text-align: center; margin-top: 2rem;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <p style="margin: 0; font-size: 1rem;">&copy; {{ date('Y') }} CleanFresh Laundry | All Rights Reserved.</p>
-        <p style="margin: 0.5rem 0;">123 Fresh Street, Laundryville, LA 45678 | Phone: (+62) 0382-24580-9779 | Email: cucilaundry@cleanfresh.com</p>
-    </div>
-</footer>
+
+    <footer>
+        <div>
+            <p>&copy; {{ date('Y') }} Fast Laundry | All Rights Reserved.</p>
+            <p>123 Diponegoro Street, Serayu, Madiun | Phone: (+62) 0382-24580-9779 | Email: fastlaundry@gmail.com</p>
+        </div>
+    </footer>
+
+    <!-- Tambahan Script -->
+    <script>
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("scrollPosition")) {
+                window.scrollTo(0, localStorage.getItem("scrollPosition"));
+            }
+            window.addEventListener("beforeunload", function() {
+                localStorage.setItem("scrollPosition", window.scrollY);
+            });
+        });
+    </script>
+</body>
 </html>

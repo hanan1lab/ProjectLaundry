@@ -27,14 +27,37 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Rute Pembelian
         Route::prefix('pembelian')->name('pembelian.')->group(function () {
+            // Menampilkan semua data pembelian
             Route::get('/', [PembelianController::class, 'index'])->name('index');
+        
+            // Form tambah pembelian
             Route::get('/create', [PembelianController::class, 'create'])->name('create');
+        
+            // Proses simpan data pembelian baru
             Route::post('/', [PembelianController::class, 'store'])->name('store');
+        
+            // Menampilkan detail pembelian berdasarkan ID
             Route::get('/{id}', [PembelianController::class, 'show'])->name('show')->whereNumber('id');
+        
+            // Form edit pembelian berdasarkan ID
             Route::get('/{id}/edit', [PembelianController::class, 'edit'])->name('edit')->whereNumber('id');
+        
+            // Proses update data pembelian berdasarkan ID
             Route::put('/{id}', [PembelianController::class, 'update'])->name('update')->whereNumber('id');
+        
+            // Soft delete pembelian berdasarkan ID
             Route::delete('/{id}', [PembelianController::class, 'destroy'])->name('destroy')->whereNumber('id');
+        
+            // Menampilkan data yang dihapus (soft delete)
+            Route::get('/trashed', [PembelianController::class, 'trashed'])->name('trashed');
+        
+            // Memulihkan data dari soft delete berdasarkan ID
+            Route::patch('/trashed/{id}/restore', [PembelianController::class, 'restore'])->name('restore')->whereNumber('id');
+        
+            // Menghapus permanen data yang sudah dihapus (soft delete) berdasarkan ID
+            Route::delete('/trashed/{id}/delete', [PembelianController::class, 'forceDelete'])->name('forceDelete')->whereNumber('id');
         });
+        
 
         // Rute Transaksi
         Route::prefix('transaksi')->name('transaksi.')->group(function () {

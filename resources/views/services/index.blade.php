@@ -159,9 +159,9 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($services as $service)
+            @forelse($services as $index=> $service)
                 <tr>
-                    <td>{{ $service->id }}</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ $service->name }}</td>
                     <td>{{ number_format($service->price_per_kg, 2) }}</td>
                     <td>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class PembelianController extends Controller
 {
@@ -79,5 +81,30 @@ class PembelianController extends Controller
         $pembelian->delete();
 
         return redirect()->route('pembelian.index')->with('success', 'Pembelian berhasil dihapus!');
+    }
+    // Tampilkan data yang dihapus (soft delete)
+    public function trashed()
+    {
+        $trashed = Pembelian::onlyTrashed()->get();
+        return view('pembelian.trashed', compact('trashed'));
+    }
+    // Pulihkan data dari arsip atau soft delete
+    public function restore($id)
+    {
+        $pembelian = Pembelian::onlyTrashed()->findOrFail($id);
+        $pembelian->restore();
+
+        return redirect()->route('pembelian.index')->with('success', 'Data pembelian berhasil dipulihkan!');
+    }
+public function forceDelete($id)
+    {
+        // Ambil data yang dihapus dengan soft delete
+        $pembelian = Pembelian::onlyTrashed()->findOrFail($id);
+
+        // Hapus permanen data dari database
+        $pembelian->forceDelete();
+
+        // Redirect kembali ke halaman data yang dihapus dengan pesan sukses
+        return redirect()->route('pembelian.trashed')->with('success', 'Data pembelian berhasil dihapus secara permanen!');
     }
 }

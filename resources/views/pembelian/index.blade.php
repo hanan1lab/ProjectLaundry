@@ -145,9 +145,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($pembelians as $pembelian)
+            @foreach($pembelians as $index => $pembelian)
                 <tr>
-                    <td>{{ $pembelian->id }}</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ $pembelian->item_name }}</td>
                     <td>{{ $pembelian->amount }}</td>
                     <td>{{ $pembelian->quantity }}</td>
@@ -168,8 +168,10 @@
         </table>
     @endif
 
-    <a href="{{ route('home.admin') }}">Kembali ke Dashboard</a>
+    <a href="{{ route('home.admin') }}">Kembali ke Halaman Admin</a>
     <a href="{{ route('pembelian.create') }}">Tambah Pembelian</a>
+    <a href="{{ route('pembelian.trashed') }}" class="btn-trashed">Lihat Data Dihapus</a>
+
 
 </body>
 </html>

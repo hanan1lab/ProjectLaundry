@@ -1,4 +1,3 @@
-<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,190 +6,138 @@
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Flexbox untuk menempatkan footer di bagian paling bawah */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1604335398980-ededcadcc37d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
+        }
+        .content {
+            flex: 1;
+        }
+
+        /* Kartu Dashboard */
         .stat-card {
             padding: 20px;
             border-radius: 10px;
             color: #fff;
             font-weight: bold;
             margin-bottom: 20px;
-        }
-
-        .stat-card .card-body {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
-
-        .stat-card .card-body i {
-            font-size: 40px;
+        .card-title {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .card-text {
+            margin: 0;
+            font-size: 1.2rem;
         }
 
-        .table th, .table td {
-            vertical-align: middle;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 10px;
-        }
-
-        .content {
-            margin-top: 30px;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #343a40; /* Warna hitam agak abu */
+            color: #fff; /* Warna teks putih */
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('pembelian.index') }}">Pembelian</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('services.index') }}">Layanan</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('laporan.index') }}">Laporan</a>
-                </li>
-            </ul>
-
-            <!-- Logout Button -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm nav-link" style="border: none; background: none; color: white;">
-                            Logout
-                        </button>
-                    </form>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('pembelian.index') }}">Pembelian</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('services.index') }}">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('laporan.index') }}">Laporan</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">Profil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Main Content -->
-    <div class="container content">
-        <h1>Dashboard</h1>
-
-        <!-- Statistik -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="stat-card bg-primary">
-                    <div class="card-body">
-                        <div>
-                            <h3>37</h3>
-                            <p>Total Produk</p>
-                        </div>
-                        <i class="fas fa-shopping-cart"></i>
+    <div class="container mt-4 content">
+        <div class="row mt-4">
+            <!-- Antrian -->
+            <div class="col-md-3">
+                <div class="stat-card" style="background-color: #007bff;">
+                    <div>
+                        <h3 class="card-title">{{ $antrian }}</h3>
+                        <p class="card-text">Antrian</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="stat-card bg-success">
-                    <div class="card-body">
-                        <div>
-                            <h3>3</h3>
-                            <p>Roles</p>
-                        </div>
-                        <i class="fas fa-users-cog"></i>
+            <!-- Proses -->
+            <div class="col-md-3">
+                <div class="stat-card" style="background-color:rgb(213, 234, 60);">
+                    <div>
+                        <h3 class="card-title">{{ $proses }}</h3>
+                        <p class="card-text">Proses</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="stat-card bg-warning">
-                    <div class="card-body">
-                        <div>
-                            <h3>65</h3>
-                            <p>Unique Visitors</p>
-                        </div>
-                        <i class="fas fa-chart-line"></i>
+            <!-- Selesai -->
+            <div class="col-md-3">
+                <div class="stat-card" style="background-color: #28a745;">
+                    <div>
+                        <h3 class="card-title">{{ $selesai }}</h3>
+                        <p class="card-text">Selesai</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Dibatalkan -->
+            <div class="col-md-3">
+                <div class="stat-card" style="background-color: #dc3545;">
+                    <div>
+                        <h3 class="card-title">{{ $dibatalkan }}</h3>
+                        <p class="card-text">Dibatalkan</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Tabel Produk -->
-        <h3>Produk</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Nama Produk</th>
-                    <th scope="col">Kategori</th>
-                    <th scope="col">Harga Beli</th>
-                    <th scope="col">Harga Jual</th>
-                    <th scope="col">Stok</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Et eos.</td>
-                    <td>Soluta quasi.</td>
-                    <td>79,141</td>
-                    <td>81,141</td>
-                    <td>43</td>
-                </tr>
-                <tr>
-                    <td>Reiciendis ratione.</td>
-                    <td>Sint neque.</td>
-                    <td>22,636</td>
-                    <td>24,636</td>
-                    <td>42</td>
-                </tr>
-                <tr>
-                    <td>Consequatur quia et.</td>
-                    <td>Rerum.</td>
-                    <td>74,170</td>
-                    <td>76,170</td>
-                    <td>39</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Tabel Users -->
-        <h3>Users</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Roles</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Isengoding</td>
-                    <td>admin@admin.com</td>
-                    <td>Admin</td>
-                    <td>Aktif</td>
-                </tr>
-                <tr>
-                    <td>Tomiko Van</td>
-                    <td>user1@example.com</td>
-                    <td>Kasir</td>
-                    <td>Aktif</td>
-                </tr>
-                <tr>
-                    <td>Elder Titan</td>
-                    <td>user2@example.com</td>
-                    <td>Admin</td>
-                    <td>Nonaktif</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; {{ date('Y') }} Fast Laundry. All Rights Reserved.</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>
-<x-app-layout>
